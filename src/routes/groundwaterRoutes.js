@@ -1,9 +1,16 @@
-import { Router } from 'express';
-import { getGISStations } from '../controllers/groundwaterController.js';
+import express from 'express';
+import {
+  getGISStations,
+  getGroundwaterTrends,
+  getWaterQuality,
+  getAlerts,
+} from '../controllers/groundwaterController.js';
 
-const router = Router();
+const router = express.Router();
 
-// GIS MapLibre Endpoint
 router.get('/gis/stations', getGISStations);
+router.get('/trends', getGroundwaterTrends);
+router.get('/quality', getWaterQuality);
+router.get('/alerts', getAlerts);
 
 export default router;
