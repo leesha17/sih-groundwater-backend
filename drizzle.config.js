@@ -1,13 +1,15 @@
+import { defineConfig } from 'drizzle-kit';
 import dotenv from 'dotenv';
+
 dotenv.config();
 
-/** @type { import("drizzle-kit").Config } */
-export default {
+export default defineConfig({
   schema: './src/models/schema.js',
   out: './drizzle',
-  driver: 'pg',
   dialect: 'postgresql',
   dbCredentials: {
-    connectionString: process.env.DATABASE_URL,
+    url: process.env.DATABASE_URL,
   },
-};
+  // Ignore PostGIS internal tables (like spatial_ref_sys)
+  tablesFilter: ['!spatial_ref_sys'],
+});
